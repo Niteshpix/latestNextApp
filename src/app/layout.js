@@ -2,6 +2,7 @@ import Header from "./components/header";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Footer from "./components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className} suppressHydrationWarning={true}>
         <Header slides={slides} />
         {children}
+        <Footer />
       </body>
     </html>
   );

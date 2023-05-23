@@ -28,6 +28,24 @@ function Header({ slides }) {
     return resetTimeout;
   }, [index, slides.length]);
 
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      if (scrollPosition > 650) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <div className={styles.slideshow}>
       {pathname === "/" ? (
@@ -46,7 +64,9 @@ function Header({ slides }) {
       )}
 
       <div
-        className={pathname === "/" ? styles.navbarWrapper : styles.navbarouter}
+        className={`${
+          pathname === "/" ? styles.navbarWrapper : styles.navbarouter
+        } ${scrolled ? styles.scrolledClass : ""}`}
       >
         <Navbar collapseOnSelect expand="lg" className={styles.navbar}>
           <Navbar.Brand className={styles.navbarbrand} href="/">
